@@ -173,6 +173,3 @@ def dataFromFile(filename='results/obhiy', myData=None):
 			# 	break
 			# index += 1
 	return random.randint(4 * 10 ** 5, 1.2 * 10 ** 6)
-
-
-app.run(host="0.0.0.0", port="80")
