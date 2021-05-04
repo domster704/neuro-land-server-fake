@@ -146,30 +146,20 @@ def dataFromFile(filename='results/obhiy', myData=None):
 	myDataCopy = myData.copy()
 	index = 0
 	dictionary = []
-	with open(f'{filename}.csv', 'r', encoding='utf-8') as f:
-		# index = 0
-		# while isEnd or index < 10:
-		# 	if index != 0:
-		# 		myData = myDataCopy[:-index]
-		# 	print(myData, index)
-		var = 0
-		for i in f:
-			index += 1
-			if var == 0:
-				var += 1
-				continue
-			# dictionary = list(map(float, [x for x in i.split(',')[:2]])) + list(map(float, [x for x in i.split(',')[3:-1]]))
-			try:
-				dictionary = list(map(float, [x for x in i.split(',')]))[:2]
-			except Exception as e:
-				exit()
-
-			# print(myData, "  **  ", dictionary)
-			if myData == dictionary:
-				return i.split(',')[2]
-			# if ' '.join(list(map(str, myData))) in ' '.join(list(map(str, dictionary))):
-			# 	print(i)
-			# 	isEnd = True
-			# 	break
-			# index += 1
+	try:
+		with open(f'{filename}.csv', 'r', encoding='utf-8') as f:
+			var = 0
+			for i in f:
+				index += 1
+				if var == 0:
+					var += 1
+					continue
+				try:
+					dictionary = list(map(float, [x for x in i.split(',')]))[:2]
+				except Exception as e:
+					exit()
+				if myData == dictionary:
+					return i.split(',')[2]
+	except Exception as e:
+		return random.randint(4 * 10 ** 5, 1.2 * 10 ** 6)
 	return random.randint(4 * 10 ** 5, 1.2 * 10 ** 6)
