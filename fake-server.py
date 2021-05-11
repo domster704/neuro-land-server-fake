@@ -253,26 +253,7 @@ def dataFromFile(filename='obhiy', myData=None):
 				  [320178.97610582865, 80.0],
 				  [237478.4814919021, 81.0],
 				  ]
-	index = 0
-	dictionary = []
 	try:
-		# with open(f'{filename}.csv', 'r', encoding='utf-8') as f:
-		# 	var = 0
-		# 	for i in f:
-		# 		index += 1
-		# 		if var == 0:
-		# 			var += 1
-		# 			continue
-		# 		try:
-		# 			dictionary = list(map(float, [x for x in i.split(',')]))[:2]
-		# 		except Exception as e:
-		# 			exit()
-		# 		if myData == dictionary:
-		# 			for j in averageVal:
-		# 				if j[1] == newCity:
-		# 					if float(i.split(',')[2]) * 5 < j[0] * myData[0]:
-		# 						return myData[0] * j[0]
-		# 					return (float(i.split(',')[2]) + myData[0] * j[0]) / 2
 		conn = sqlite3.connect('full.db')
 		curs = conn.cursor()
 		i = 1
