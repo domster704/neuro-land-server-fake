@@ -295,6 +295,3 @@ def dataFromFile(filename='obhiy', myData=None):
 		print(e)
 	print(myData[0] * averageValAllCity, 2)
 	return myData[0] * averageValAllCity
-
-
-app.run(host='0.0.0.0', port='80')
