@@ -1,4 +1,4 @@
-import locale
+# import locale
 import sqlite3
 
 from flask import Flask, request
@@ -94,7 +94,7 @@ city = {
 db = DB()
 
 newCity = 1
-locale.setlocale(locale.LC_ALL, ('ru_Ru', 'UTF-8'))
+# locale.setlocale(locale.LC_ALL, ('ru_Ru', 'UTF-8'))
 
 
 @app.route("/register", methods=["POST", "GET"])
@@ -112,7 +112,6 @@ def login():
 	data = list(dict(data).values())
 	name, password = data
 	res = str(db.authorise(name, password))
-	print(res)
 	return res
 
 
@@ -154,14 +153,14 @@ def get_cost_by_url():
 		except:
 			continue
 
-	print(data)
 	randomValue = random.randint(0, 1)
 	per = 0
 	if randomValue == 0:
 		per = data[2] * random.randint(900000, 999999) / 10 ** 7
 	elif randomValue == 1:
 		per = data[2] * random.randint(1000001, 1100000) / 10 ** 7
-	return str(locale.currency(float(per), grouping=True))
+	# return str(locale.currency(float(per), grouping=True))
+	return str(per)
 
 
 @app.route("/data", methods=["POST", "GET"])
@@ -183,8 +182,8 @@ def get_cost_by_data():
 		per = data * random.randint(900000, 999999) / 10 ** 7
 	elif randomValue == 1:
 		per = data * random.randint(1000001, 1100000) / 10 ** 7
-	print(per, locale.currency(float(per), grouping=True))
-	return str(locale.currency(float(per), grouping=True))
+	# return str(locale.currency(float(per), grouping=True))
+	return str(per)
 
 
 def dataFromFile(myData=None):
@@ -271,8 +270,10 @@ def dataFromFile(myData=None):
 							return (allRow[3] + myData[0] * j[0]) / 2
 				i += 1
 		except Exception as e:
-			print(e)
+			pass
+			# print(e)
 	except Exception as e:
-		print(e)
+		pass
+		# print(e)
 	print(myData[0] * averageValAllCity, 2)
 	return myData[0] * averageValAllCity
