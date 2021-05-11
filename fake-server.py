@@ -187,7 +187,7 @@ def get_cost_by_data():
 	return str(locale.currency(float(per), grouping=True))
 
 
-def dataFromFile(filename='obhiy', myData=None):
+def dataFromFile(myData=None):
 	"""Берём площадь и расстояние до городаси и находим похожее в файле"""
 	averageValAllCity = 128837.0837521076
 	averageVal = [[100284.63630573249, 1.0],
