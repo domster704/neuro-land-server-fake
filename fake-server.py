@@ -1,5 +1,6 @@
 # import locale
 import sqlite3
+import time
 
 from flask import Flask, request
 from domofond_parser import get_data_by_link
@@ -110,6 +111,7 @@ def reg():
 def login():
 	data = request.get_json(force=True)
 	data = list(dict(data).values())
+	print(data)
 	name, password = data
 	res = str(db.authorise(name, password))
 	return res
@@ -136,11 +138,6 @@ def xd():
 	return "<h1>It's a neuroland server</h1>"
 
 
-@app.route("/")
-def root():
-	return "hello, it's test response"
-
-
 # TODO: сделать функцию get_cost_by_data
 @app.route("/url", methods=["POST", "GET"])
 def get_cost_by_url():
@@ -150,17 +147,26 @@ def get_cost_by_url():
 		try:
 			data = get_data_by_link(url)
 			isAll = True
-		except:
+		except Exception as e:
+			time.sleep(0.01)
+			print(e)
 			continue
 
 	randomValue = random.randint(0, 1)
 	per = 0
 	if randomValue == 0:
-		per = data[2] * random.randint(900000, 999999) / 10 ** 7
+		per = data[2] * random.randint(900000, 999999) / 10 ** 6
 	elif randomValue == 1:
-		per = data[2] * random.randint(1000001, 1100000) / 10 ** 7
+		per = data[2] * random.randint(1000001, 1100000) / 10 ** 6
+
+	data = list(map(str, data))
 	# return str(locale.currency(float(per), grouping=True))
-	return str(per)
+	# Экология, ЖКХ, Соседи, Транспорт
+	cityReq = ""
+	for i, j in city.items():
+		if int(j) == float(data[-1]):
+			print(str(round(per)) + ";" + data[3] + ";" + data[5] + ";" + data[6] + ";" + data[10] + ";" + i + ";" + data[0] + ";" + data[1])
+			return str(round(per)) + ";" + data[3] + ";" + data[5] + ";" + data[6] + ";" + data[10] + ";" + i + ";" + data[0] + ";" + data[1]
 
 
 @app.route("/data", methods=["POST", "GET"])
@@ -179,11 +185,11 @@ def get_cost_by_data():
 	randomValue = random.randint(0, 1)
 	per = 0
 	if randomValue == 0:
-		per = data * random.randint(900000, 999999) / 10 ** 7
+		per = data * random.randint(900000, 999999) / 10 ** 6
 	elif randomValue == 1:
-		per = data * random.randint(1000001, 1100000) / 10 ** 7
+		per = data * random.randint(1000001, 1100000) / 10 ** 6
 	# return str(locale.currency(float(per), grouping=True))
-	return str(per)
+	return str(round(per))
 
 
 def dataFromFile(myData=None):
@@ -277,3 +283,6 @@ def dataFromFile(myData=None):
 		# print(e)
 	print(myData[0] * averageValAllCity, 2)
 	return myData[0] * averageValAllCity
+
+
+app.run(port='80', host="0.0.0.0")

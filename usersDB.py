@@ -1,9 +1,12 @@
 import sqlite3
 import hashlib
+import psycopg2
+import os
 
 class DB:
 	def __init__(self):
-		self.db = sqlite3.connect('users.db', check_same_thread=False)
+		# self.db = sqlite3.connect('users.db', check_same_thread=False)
+		self.db = psycopg2.connect('')
 		self.cursor = self.db.cursor()
 		self.cursor.execute('''CREATE TABLE IF NOT EXISTS users (
 						id INTEGER PRIMARY KEY,
