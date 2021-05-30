@@ -285,4 +285,8 @@ def dataFromFile(myData=None):
 	return myData[0] * averageValAllCity
 
 
+# db.addUser(name="admin", password="admin", content="test")
+# db.printALL()
+# print(db.authorise('admin', 'admin'))
+# print(db.getContent('admin', 'admin'))
 app.run(port='80', host="0.0.0.0")
