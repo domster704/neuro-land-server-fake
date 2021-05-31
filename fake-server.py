@@ -289,4 +289,4 @@ def dataFromFile(myData=None):
 # db.printALL()
 # print(db.authorise('admin', 'admin'))
 # print(db.getContent('admin', 'admin'))
-app.run(port='80', host="0.0.0.0")
+# app.run(port='80', host="0.0.0.0")
