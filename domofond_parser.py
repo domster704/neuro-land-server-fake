@@ -2,9 +2,10 @@ from bs4 import BeautifulSoup as bs
 import requests
 import re
 import additional_data
+import fake_useragent
 
 HEADERS = {
-	'User-Agent': ''  # UserAgent(verify_ssl=False).chrome
+	'User-Agent': fake_useragent.UserAgent(verify_ssl=False).chrome
 }
 CITY = {
 	"Камчатский край": "1",

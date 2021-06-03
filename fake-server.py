@@ -143,14 +143,8 @@ def xd():
 def get_cost_by_url():
 	url = request.get_json(force=True)['0']
 	isAll = False
-	while not isAll:
-		try:
-			data = get_data_by_link(url)
-			isAll = True
-		except Exception as e:
-			time.sleep(0.01)
-			print(e)
-			continue
+	data = get_data_by_link(url)
+	isAll = True
 
 	randomValue = random.randint(0, 1)
 	per = 0
@@ -171,6 +165,7 @@ def get_cost_by_url():
 
 @app.route("/data", methods=["POST", "GET"])
 def get_cost_by_data():
+	time.sleep(2)
 	global newCity
 	data = request.get_json(force=True)
 
