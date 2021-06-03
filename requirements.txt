@@ -4,3 +4,4 @@ Flask~=1.1.2
 beautifulsoup4~=4.9.3
 psycopg2-binary==2.8.6
 gunicorn==20.1.0
+fake_useragent==0.1.11
