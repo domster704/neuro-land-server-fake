@@ -1,10 +1,10 @@
-# import locale
+import random
 import sqlite3
 import time
 
 from flask import Flask, request
+
 from domofond_parser import get_data_by_link
-import random
 from usersDB import DB
 
 app = Flask(__name__)
@@ -95,7 +95,6 @@ city = {
 db = DB()
 
 newCity = 1
-# locale.setlocale(locale.LC_ALL, ('ru_Ru', 'UTF-8'))
 
 
 @app.route("/register", methods=["POST", "GET"])
@@ -138,13 +137,10 @@ def xd():
 	return "<h1>It's a neuroland server</h1>"
 
 
-# TODO: сделать функцию get_cost_by_data
 @app.route("/url", methods=["POST", "GET"])
 def get_cost_by_url():
 	url = request.get_json(force=True)['0']
-	isAll = False
 	data = get_data_by_link(url)
-	isAll = True
 
 	randomValue = random.randint(0, 1)
 	per = 0
@@ -154,13 +150,13 @@ def get_cost_by_url():
 		per = data[2] * random.randint(1000001, 1100000) / 10 ** 6
 
 	data = list(map(str, data))
-	# return str(locale.currency(float(per), grouping=True))
-	# Экология, ЖКХ, Соседи, Транспорт
-	cityReq = ""
 	for i, j in city.items():
 		if int(j) == float(data[-1]):
-			print(str(round(per)) + ";" + data[3] + ";" + data[5] + ";" + data[6] + ";" + data[10] + ";" + i + ";" + data[0] + ";" + data[1])
-			return str(round(per)) + ";" + data[3] + ";" + data[5] + ";" + data[6] + ";" + data[10] + ";" + i + ";" + data[0] + ";" + data[1]
+			print(
+				str(round(per)) + ";" + data[3] + ";" + data[5] + ";" + data[6] + ";" + data[10] + ";" + i + ";" + data[
+					0] + ";" + data[1])
+			return str(round(per)) + ";" + data[3] + ";" + data[5] + ";" + data[6] + ";" + data[10] + ";" + i + ";" + \
+				   data[0] + ";" + data[1]
 
 
 @app.route("/data", methods=["POST", "GET"])
@@ -267,17 +263,13 @@ def dataFromFile(myData=None):
 							if allRow[3] + 500000 < j[0] * myData[0]:
 								print(allRow[3], j[0], myData[0])
 								return myData[0] * j[0]
-							print(2)
 							return (allRow[3] + myData[0] * j[0]) / 2
 				i += 1
 		except Exception as e:
 			pass
-			# print(e)
 	except Exception as e:
 		pass
-		# print(e)
 	print(myData[0] * averageValAllCity, 2)
 	return myData[0] * averageValAllCity
-
 
 # app.run(port='80', host="0.0.0.0")
